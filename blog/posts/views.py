@@ -14,7 +14,8 @@ def posts_detail(request):
 
 
 def posts_list(request):
-    return HttpResponse("hello")
+    cotext= {'title': 'list'}
+    return render(request, 'index.html', cotext)
 
 
 def posts_update (request):
