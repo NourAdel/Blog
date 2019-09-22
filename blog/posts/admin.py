@@ -5,10 +5,10 @@ from .models import Post
 
 class PostAdmin (admin.ModelAdmin):
     # post attributes displayed to the admin
-    list_display = ["title", "updated", "timestamp"]
+    list_display = ('title','content', 'updated', 'timestamp' )
 
-    # post attributes ???? to the admin
-    list_display_links = ["updated", "timestamp"]
+    # post attributes shown as links to the post to the admin
+    list_display_links = ["updated"]
     # post attributes the admin can edit
     list_editable = ["title"]
     # post attributes the admin can search in
@@ -17,4 +17,4 @@ class PostAdmin (admin.ModelAdmin):
 
     class Meta:
         model = Post
-admin.site.register(Post)
+admin.site.register(Post, PostAdmin)
