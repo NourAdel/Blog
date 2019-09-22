@@ -1,9 +1,9 @@
 from django.contrib import admin
-from django.conf.urls import url, include
-from posts import urls
+from django.conf.urls import url
+from django.urls import include
 
 
-urlpatterns = {
+urlpatterns = [
     url(r'admin/', admin.site.urls),
-    url(r'posts/$', posts.urls),
-}
+    url(r'posts/', include('posts.urls')),
+]
