@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
 </head>
 <body>
-    <h1> {{ title}} is working</h1>
+    <h1> posts</h1>
+    {% for i in objects %}
+    <a href='{{i.get_absolute_url}}'>{{i.title}}</a><br>
+    {{i.content}}<br>
+    {{i.updated}}<br>
+    {%endfor%}
 </body>
 </html>
