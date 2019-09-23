@@ -5,6 +5,14 @@
 
 </head>
 <body>
+{% if messages%}
+
+<ul>
+    {% for i in messages%}
+    <li>{{i}}</li>
+    {% endfor %}
+</ul>
+{% endif%}
 
     <h1>{{title}}</h1>
     {{object.content}}<br>
