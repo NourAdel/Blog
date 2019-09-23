@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> {% block title %} BLOG TWIST {% endblock title%}</title>
+</head>
+<body>
+    {% if messages%}
+<div class="messages">
+
+<ul>
+    {% for i in messages%}
+    <li>{{i}}</li>
+    {% endfor %}
+</ul>
+{% endif%}
+</div>
+<div class="container">
+    {% block content%}
+
+        <h1> posts</h1>
+        {% for i in objects %}
+            <a href='{{i.get_absolute_url}}'>{{i.title}}</a><br>
+            {{i.content}}<br>
+            {{i.updated}}<br>
+        {%endfor%}
+
+    {% endblock content%}
+
+</div>
+
+</body>
+</html>

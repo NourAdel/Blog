@@ -1,23 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+{% extends "base.html" %}
 
-</head>
-<body>
-{% if messages%}
+ {% block title %} {{object.title}} | {{block.super}}{% endblock title%}
 
-<ul>
-    {% for i in messages%}
-    <li>{{i}}</li>
-    {% endfor %}
-</ul>
-{% endif%}
+{% block content %}
 
     <h1>{{title}}</h1>
     {{object.content}}<br>
     {{object.updated}}<br>
     {{object.timestamp}}<br>
 
-</body>
-</html>
+{% endblock content%}
