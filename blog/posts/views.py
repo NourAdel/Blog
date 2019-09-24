@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .models import Post
 from .forms import PostForm
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 
 def posts_create (request):
@@ -24,7 +25,11 @@ def posts_detail(request, ID):
 
 def posts_list(request):
     objlist = Post.objects.all()
-    context = {'title': 'list', 'objects': objlist}
+    paginator = Paginator(objlist, 9) # Show 25 contacts per page
+    p = " POSTS"
+    page = request.GET.get(p)
+    objlist = paginator.get_page(page)
+    context = {'objects': objlist, 'p':p}
     return render(request, 'post_list.html', context)
 
 
