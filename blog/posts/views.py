@@ -25,7 +25,7 @@ def posts_detail(request, ID):
 def posts_list(request):
     objlist = Post.objects.all()
     context = {'title': 'list', 'objects': objlist}
-    return render(request, 'base.html', context)
+    return render(request, 'post_list.html', context)
 
 
 def posts_update (request, ID):

@@ -3,10 +3,9 @@
  {% block title %} {{object.title}} | {{block.super}}{% endblock title%}
 
 {% block content %}
+<div class="center" style=" display: table; margin-right: auto; margin-left: auto;">
+    <h1>{{title}} <small style="font-size: small"> {{object.timestamp}}</small> </h1>
+    {{object.content | linebreaks}}<br>
 
-    <h1>{{title}}</h1>
-    {{object.content}}<br>
-    {{object.updated}}<br>
-    {{object.timestamp}}<br>
-
+<div/>
 {% endblock content%}

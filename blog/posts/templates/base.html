@@ -1,33 +1,21 @@
+{% load staticfiles%}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title> {% block title %} BLOG TWIST {% endblock title%}</title>
-</head>
-<body>
-    {% if messages%}
-<div class="messages">
+    <head>
+        <meta charset="UTF-8">
+        <title> {% block title %} BLOG TWIST {% endblock title%}</title>
+        <link rel="stylesheet" href='{% static "css/base.css" %}'>
+        <link rel="icon" href='{% static "img/icon.png" %}' type="img/png">
+    </head>
+    <body>
 
-<ul>
-    {% for i in messages%}
-    <li>{{i}}</li>
-    {% endfor %}
-</ul>
-{% endif%}
-</div>
-<div class="container">
-    {% block content%}
-
-        <h1> posts</h1>
-        {% for i in objects %}
-            <a href='{{i.get_absolute_url}}'>{{i.title}}</a><br>
-            {{i.content}}<br>
-            {{i.updated}}<br>
-        {%endfor%}
-
-    {% endblock content%}
-
-</div>
-
-</body>
+        {% include "messages.html" %}
+        <div class="container">
+             {% block content %}
+             {% endblock content%}
+        </div>
+    </body>
 </html>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

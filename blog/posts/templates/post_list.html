@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+
+{% block title %} {{block.super}}{% endblock title%}
+
+{% block content%}
+
+     <h1> posts</h1>
+    <table>
+        <tr>
+                {% for i in objects %}
+                <td style="padding: 0 15px 0 15px;">
+
+                <div class="card" style="width: 20rem; ">
+                  <div class="card-body">
+                    <h4 class="card-title">{{i.title}} <small style="font-size: small;"> {{i.timestamp | timesince}}</small></h4>
+                    <p class="card-text">{{i.content | linebreaks | truncatechars:120}}</p>
+                    <a href="{{i.get_absolute_url}}" class="btn btn-outline-dark">view</a> <a href="{{i.get_absolute_url}}edit" class="btn btn-outline-info">edit</a>
+                  </div>
+                </div> <br>
+                {% cycle '' '' '</td></tr><tr>' %}
+
+
+
+                {%endfor%}
+
+            </tr>
+    </table>
+
+{% endblock content%}
