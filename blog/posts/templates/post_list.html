@@ -5,6 +5,7 @@
 
 {% block content%}
 
+
      <h1> posts</h1>
     <table>
         <tr>
@@ -13,6 +14,9 @@
 
                 <div class="card" style="width: 20rem; ">
                   <div class="card-body">
+                      {% if i.cover %}
+                      <img src="WhatsApp Image 2019-08-30 at 9.01.57 PM.jpeg" class="img-responsive"/>
+                      {% endif %}
                     <h4 class="card-title">{{i.title}} <small style="font-size: small;"> {{i.timestamp | timesince}}</small></h4>
                     <p class="card-text">{{i.content | linebreaks | truncatechars:120}}</p>
                     <a href="{{i.get_absolute_url}}" class="btn btn-outline-dark">view</a> <a href="{{i.get_absolute_url}}edit" class="btn btn-outline-info">edit</a>
