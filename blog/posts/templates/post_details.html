@@ -5,7 +5,7 @@
 {% block content %}
 <div class="center" style=" display: table; margin-right: auto; margin-left: auto;">
 {% if object.cover %}
-    <img src="{{object.cover.url}}" class="img-responsive"/>
+    <img src="{{ object.cover.url}}" class="img-responsive"/>
 {% endif %}
     <h1>{{title}} <small style="font-size: small"> {{object.timestamp}}</small> </h1>
     {{object.content | linebreaks}}<br>

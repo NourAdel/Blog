@@ -1,5 +1,5 @@
-{% extends "base.html" %}
 
+{% extends "base.html" %}
 
 {% block title %} {{block.super}}{% endblock title%}
 
@@ -15,7 +15,7 @@
                 <div class="card" style="width: 20rem; ">
                   <div class="card-body">
                       {% if i.cover %}
-                      <img src="WhatsApp Image 2019-08-30 at 9.01.57 PM.jpeg" class="img-responsive"/>
+                     <img src="{{ i.cover.url}}" class=class="img-responsive">
                       {% endif %}
                     <h4 class="card-title">{{i.title}} <small style="font-size: small;"> {{i.timestamp | timesince}}</small></h4>
                     <p class="card-text">{{i.content | linebreaks | truncatechars:120}}</p>
