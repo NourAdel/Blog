@@ -1,14 +1,20 @@
+
 {% extends "base.html" %}
 
  {% block title %} {{object.title}} | {{block.super}}{% endblock title%}
 
 {% block content %}
-<div class="center" style=" display: table; margin-right: auto; margin-left: auto;">
-{% if object.cover %}
-    <img src="{{ object.cover.url}}" class="img-responsive"/>
-{% endif %}
-    <h1>{{title}} <small style="font-size: small"> {{object.timestamp}}</small> </h1>
-    {{object.content | linebreaks}}<br>
 
-<div/>
+<div class="card mb-3" style="height :100%; width: 50%;  margin: 0 auto; ">
+    {% if object.cover %}
+  <img src="{{ object.cover.url}}" class="card-img-top" style='height: 100%; width: 100%; object-fit: contain'>
+    {% endif %}
+  <div class="card-body">
+    <h5 class="card-title">{{title}} </small></h5>
+    <p class="card-text">{{object.content | linebreaks}}</p>
+    <p class="card-text"><small class="text-muted">Last updated {{object.updated}}</small></p>
+  </div>
+</div>
+
+
 {% endblock content%}

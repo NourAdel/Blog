@@ -12,20 +12,17 @@
                 {% for i in objects %}
                 <td style="padding: 0 15px 0 15px;">
 
-                <div class="card" style="width: 20rem; ">
+                <div class="card" style="width: 18rem;">
                   <div class="card-body">
                       {% if i.cover %}
-                     <img src="{{ i.cover.url}}" class=class="img-responsive">
+                     <img src="{{ i.cover.url}}" class="img-fluid" >
                       {% endif %}
                     <h4 class="card-title">{{i.title}} <small style="font-size: small;"> {{i.timestamp | timesince}}</small></h4>
                     <p class="card-text">{{i.content | linebreaks | truncatechars:120}}</p>
-                    <a href="{{i.get_absolute_url}}" class="btn btn-outline-dark">view</a> <a href="{{i.get_absolute_url}}edit" class="btn btn-outline-info">edit</a>
+                   <a href="{{i.get_absolute_url}}" class="btn btn-outline-dark">view</a> <a href="{{i.get_absolute_url}}edit" class="btn btn-outline-info">edit</a>
                   </div>
                 </div> <br>
                 {% cycle '' '' '</td></tr><tr>' %}
-
-
-
                 {%endfor%}
 
             </tr>
