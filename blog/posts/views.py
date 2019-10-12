@@ -5,7 +5,7 @@ from .forms import PostForm
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.utils import timezone
-
+from django.db.models import Q
 
 def posts_create (request):
     # to make sure the user is an admin or a staff member
@@ -36,7 +36,16 @@ def posts_list(request):
     if  request.user.is_staff or  request.user.is_superuser:
         objlist =Post.objects.all()
 
-    paginator = Paginator(objlist, 9) # Show 9 contacts per page
+    # next 8 lines: filtering the posts list by the search text
+    query = request.GET.get("search")
+    if query:
+        objlist = objlist.filter(
+            Q(title__icontains= query)|
+            Q(content__icontains= query)|
+            Q(user__first_name__icontains= query)|
+            Q(user__last_name__icontains= query)
+            ).distinct()
+    paginator = Paginator(objlist, 3)  # Show 9 contacts per page
     p = " POSTS"
     page = request.GET.get(p)
     objlist = paginator.get_page(page)
