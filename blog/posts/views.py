@@ -13,6 +13,7 @@ def posts_create (request):
     form = PostForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         instance = form.save(commit=False)
+        # the post user will be the request user
         instance.user = request.user
         instance.save()
         messages.success(request, "Successfully created")

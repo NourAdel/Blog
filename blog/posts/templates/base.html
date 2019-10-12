@@ -8,7 +8,8 @@
         <link rel="icon" href='{% static "img/icon.png" %}' type="img/png">
     </head>
     <body>
-
+    <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0"></script>
         {% include "messages.html" %}
         <div class="container">
              {% block content %}
