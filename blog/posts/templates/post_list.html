@@ -18,7 +18,8 @@
                      <img src="{{ i.cover.url}}" class="img-fluid" >
                       {% endif %}
                     <h4 class="card-title">{{i.title}} <small style="font-size: small;"> {{i.timestamp | timesince}}</small></h4>
-                    <p class="card-text">{{i.content | linebreaks | truncatechars:120}}</p>
+                    <p> Author: {{i.user}}</p>
+                      <p class="card-text">{{i.content | linebreaks | truncatechars:120}}</p>
                    <a href="{{i.get_absolute_url}}" class="btn btn-outline-dark">view</a> <a href="{{i.get_absolute_url}}edit" class="btn btn-outline-info">edit</a>
                   </div>
                 </div> <br>

@@ -2,10 +2,12 @@ from django.db import models
 from django.urls import reverse
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
-# Create your models here.
+from django.conf import settings
 
 
 class Post (models.Model):
+    # associating posts with user, admin buy default, if the user is deleted the post will be deleted too
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     content = models.TextField()
     slug = models.SlugField(unique=True, default='-')
