@@ -66,6 +66,11 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
             ],
+            # add the custom filters here
+            'libraries':{
+            'urlify': 'posts.template_tags.urlify',
+
+            }
         },
     },
 ]
