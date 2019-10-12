@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from urllib.parse import quote
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Post
 from .forms import PostForm
@@ -19,7 +20,9 @@ def posts_create (request):
 
 def posts_detail(request, slug):
     object = get_object_or_404(Post,slug=slug)
-    context = {'title': object.title, 'object': object}
+    # url encoded text
+    sharable = quote(object.content)
+    context = {'title': object.title, 'object': object, 'sharable': sharable}
     return render(request, 'post_details.html', context)
 
 
@@ -33,8 +36,8 @@ def posts_list(request):
     return render(request, 'post_list.html', context)
 
 
-def posts_update (request, ID):
-    instance = get_object_or_404(Post, id=ID)
+def posts_update (request, slug):
+    instance = get_object_or_404(Post, slug=slug)
     form = PostForm(request.POST or None, request.FILES or None, instance= instance)
     if form.is_valid():
         instance = form.save(commit=False)

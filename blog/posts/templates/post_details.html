@@ -4,13 +4,23 @@
  {% block title %} {{object.title}} | {{block.super}}{% endblock title%}
 
 {% block content %}
-
 <div class="card mb-3" style="height :100%; width: 50%;  margin: 0 auto; ">
     {% if object.cover %}
   <img src="{{ object.cover.url}}" class="card-img-top" style='height: 100%; width: 100%; object-fit: contain'>
     {% endif %}
   <div class="card-body">
     <h5 class="card-title">{{title}} </small></h5>
+
+
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}">
+Facebook
+</a>
+    <a href="https://twitter.com/home?status={{sharable}}%20{{request.build_absolute_uri}}">
+ Twitter
+</a>
+<a href="http://www.reddit.com/submit?url={{request.build_absolute_uri}}&title={{sharable}}"> Reddit</a>
+
+
     <p class="card-text">{{object.content | linebreaks}}</p>
     <p class="card-text"><small class="text-muted">Last updated {{object.updated}}</small></p>
   </div>
