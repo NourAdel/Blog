@@ -17,7 +17,8 @@
                       {% if i.cover %}
                      <img src="{{ i.cover.url}}" class="img-fluid" >
                       {% endif %}
-                    <h4 class="card-title">{{i.title}} <small style="font-size: small;"> {{i.publish | timesince}}</small></h4>
+                    <h4 class="card-title">{{i.title}} <small style="font-size: small;"> {{i.publish | timesince}}</small></h4>{% if i.draft%}<span class="badge badge-pill badge-danger" style="position: absolute;right: 10px;">Draft</span>{% endif%}
+
                     <p> Author: {{i.user}}</p>
                       <p class="card-text">{{i.content | linebreaks | truncatechars:120}}</p>
                    <a href="{{i.get_absolute_url}}" class="btn btn-outline-dark">view</a> <a href="{{i.get_absolute_url}}edit" class="btn btn-outline-info">edit</a>

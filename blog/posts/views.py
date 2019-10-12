@@ -4,6 +4,7 @@ from .models import Post
 from .forms import PostForm
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.utils import timezone
 
 
 def posts_create (request):
@@ -23,12 +24,18 @@ def posts_create (request):
 
 def posts_detail(request, slug):
     object = get_object_or_404(Post,slug=slug)
+    if object .publish > timezone.now().date() or object.draft:
+        if not request.user.is_staff or not request.user.is_superuser:
+            return Http404
     context = {'title': object.title, 'object': object}
     return render(request, 'post_details.html', context)
 
 
 def posts_list(request):
-    objlist = Post.objects.all()
+    objlist = Post.objects.active()
+    if  request.user.is_staff or  request.user.is_superuser:
+        objlist =Post.objects.all()
+
     paginator = Paginator(objlist, 9) # Show 9 contacts per page
     p = " POSTS"
     page = request.GET.get(p)
