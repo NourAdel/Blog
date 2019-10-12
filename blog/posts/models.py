@@ -11,6 +11,8 @@ class Post (models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
     slug = models.SlugField(unique=True, default='-')
+    draft = models.BooleanField(default=False)
+    publish = models.DateField(auto_now_add=False, auto_now=False)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
     cover = models.ImageField(null=True, blank=True, upload_to="media/")
@@ -23,6 +25,8 @@ class Post (models.Model):
 
     class Meta:
         ordering = ["-timestamp", "-updated"]
+
+# a function that gets executed before the object is saved to the database
 
 
 def pre_save_post_receiver(sender, instance, *args, **kwargs):

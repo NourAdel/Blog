@@ -10,27 +10,26 @@
   <img src="{{ object.cover.url}}" class="card-img-top" style='height: 100%; width: 100%; object-fit: contain'>
     {% endif %}
   <div class="card-body">
-    <h5 class="card-title">{{title}} </small></h5>
+    <h3 class="card-title">{{title}}</h3>{% if object.draft%}<span class="badge badge-pill badge-danger" style="position: absolute;right: 10px;">Draft</span>{% endif%}
+
       <p> Author: {{object.user}}</p>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
 
     <p class="card-text">{{object.content | linebreaks}}</p>
     <p class="card-text"><small class="text-muted">Last updated {{object.updated}}</small></p>
       <hr/>
-
-          <p>      <a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}"class="fa fa-facebook">
-</a>
-    <a href="https://twitter.com/home?status={{object.content| urlify}}%20{{request.build_absolute_uri}}"class="fa fa-twitter">
-</a>
-<a href="http://www.reddit.com/submit?url={{request.build_absolute_uri}}&title={{object.content| urlify}}"class="fa fa-reddit"> </a>
-</p>
+      <!--- the link to the social media icons--->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <p>
+              <a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}"class="fa fa-facebook"></a>
+              <a href="https://twitter.com/home?status={{object.content| urlify}}%20{{request.build_absolute_uri}}"class="fa fa-twitter"></a>
+              <a href="http://www.reddit.com/submit?url={{request.build_absolute_uri}}&title={{object.content| urlify}}"class="fa fa-reddit"></a>
+          </p>
       <hr/>
-     <div class="fb-like" data-href="{{request.build_absolute_uri}}" data-width="" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
+      <div class="fb-like" data-href="{{request.build_absolute_uri}}" data-width="" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
   </div>
-
     <div class="fb-comments" data-href="{{request.build_absolute_uri}}" data-width="" data-numposts="5"></div>
-
 </div>
 
 {% endblock content%}

@@ -11,6 +11,6 @@ urlpatterns = [
     url(r'^$', views.posts_list, name="list"),
     url(r'^(?P<slug>[-\w]+)/$', views.posts_detail, name="detail"),
     url(r'^(?P<slug>[-\w]+)/edit/$', views.posts_update, name="update"),
-    url(r'^(?P<ID>\d+)/delete/$', views.posts_delete),
+    url(r'^(?P<slug>[-\w]+)/delete/$', views.posts_delete),
 ]
 
