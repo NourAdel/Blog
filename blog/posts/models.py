@@ -4,6 +4,9 @@ from django.db.models.signals import pre_save
 from django.utils.text import slugify
 from django.conf import settings
 from django.utils import timezone
+from markdown_deux import markdown
+from django.utils.safestring import mark_safe
+
 
 # post.objects.all(), post..objects.create are PostManagers
 # here we can override them or make new ones
@@ -11,10 +14,10 @@ from django.utils import timezone
 
 class PostManager(models.Manager):
     def active(self):
-        return super(PostManager,self).filter(draft=False).filter(publish__lte= timezone.now())
+        return super(PostManager, self).filter(draft=False).filter(publish__lte=timezone.now())
 
 
-class Post (models.Model):
+class Post(models.Model):
     # associating posts with user, admin buy default, if the user is deleted the post will be deleted too
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
@@ -33,10 +36,15 @@ class Post (models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("posts:detail", kwargs={'slug':self.slug})
+        return reverse("posts:detail", kwargs={'slug': self.slug})
 
     class Meta:
         ordering = ["-timestamp", "-updated"]
+
+    def get_markdown(self):
+        content = self.content
+        return mark_safe(markdown(content))
+
 
 # a function that gets executed before the object is saved to the database
 
@@ -45,9 +53,9 @@ def pre_save_post_receiver(sender, instance, *args, **kwargs):
     slug = slugify(instance.title)
     exist = Post.objects.filter(slug=slug).exists()
     if exist:
-        id = Post.objects.latest('id').id +1
+        id = Post.objects.latest('id').id + 1
         slug = "%s-%s" % (slug, str(id))
     instance.slug = slug
 
 
-pre_save.connect(pre_save_post_receiver,sender=Post)
+pre_save.connect(pre_save_post_receiver, sender=Post)
