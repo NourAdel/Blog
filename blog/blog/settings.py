@@ -43,10 +43,11 @@ INSTALLED_APPS = [
     'django_markdown',
     'django.contrib.flatpages',
     'markdown_deux',
+    'crispy_forms',
 
 
 ]
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
