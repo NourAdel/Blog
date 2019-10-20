@@ -6,6 +6,8 @@
         <title> {% block title %} BLOG TWIST {% endblock title%}</title>
         <link rel="stylesheet" href='{% static "css/base.css" %}'>
         <link rel="icon" href='{% static "img/icon.png" %}' type="img/png">
+        {% block head_extra %} {% endblock head_extra%}
+
     </head>
     <body>
     <!--- next 2 lines are the links to facebook plug-ins--->
@@ -19,6 +21,28 @@
     </body>
 </html>
 
+<!--- jquery--->
+<script
+  src="http://code.jquery.com/jquery-2.2.4.js"
+  integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+  crossorigin="anonymous"></script>
+
 <!--- bootstrap--->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<!--- marked--->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.7.0/marked.min.js"></script>
+
+<script type="txt/javascript">
+  $(document).ready(function(){
+        $(".content-markdown").each(function(){
+             var content = $(this).text()
+             console.log(content)
+             var marked = marked(content)
+             console.log(marked)
+             $(this).html(marked)
+        })
+
+    })
+</script>

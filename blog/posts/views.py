@@ -7,6 +7,7 @@ from django.core.paginator import Paginator
 from django.utils import timezone
 from django.db.models import Q
 
+
 def posts_create (request):
     # to make sure the user is an admin or a staff member
     if not request.user.is_staff or not request.user.is_superuser:
