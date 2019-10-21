@@ -6,6 +6,8 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.utils import timezone
 from django.db.models import Q
+from django.contrib.contenttypes.models import ContentType
+from comments.models import Comment
 
 
 def posts_create (request):
@@ -28,7 +30,10 @@ def posts_detail(request, slug):
     if object .publish > timezone.now().date() or object.draft:
         if not request.user.is_staff or not request.user.is_superuser:
             return Http404
-    context = {'title': object.title, 'object': object}
+    content_type = ContentType.objects.get_for_model(Post)
+    obj_id = object.id
+    comments= Comment.objects.filter(content_type= content_type, object_id=obj_id)
+    context = {'title': object.title, 'object': object, 'comments': comments}
     return render(request, 'post_details.html', context)
 
 

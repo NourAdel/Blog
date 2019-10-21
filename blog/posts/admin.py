@@ -5,7 +5,7 @@ from .models import Post
 
 class PostAdmin (admin.ModelAdmin):
     # post attributes displayed to the admin
-    list_display = ('title','content', 'updated', 'timestamp' )
+    list_display = ('title','content', 'updated', 'timestamp','id' )
 
     # post attributes shown as links to the post to the admin
     list_display_links = ["updated"]

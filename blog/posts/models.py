@@ -18,7 +18,7 @@ class PostManager(models.Manager):
 
 
 class Post(models.Model):
-    # associating posts with user, admin buy default, if the user is deleted the post will be deleted too
+    # associating posts with user, admin by default, if the user is deleted the post will be deleted too
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     content = models.TextField()

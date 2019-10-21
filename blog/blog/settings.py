@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.flatpages',
     'markdown_deux',
     'crispy_forms',
+    'comments',
 
 
 ]
