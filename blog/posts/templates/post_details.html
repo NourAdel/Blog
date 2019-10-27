@@ -1,6 +1,7 @@
 
 {% extends "base.html" %}
 {% load urlify %}
+{% load crispy_forms_tags %}
 
  {% block title %} {{object.title}} | {{block.super}}{% endblock title%}
 
@@ -17,7 +18,7 @@
     <p>{{object.get_markdown}}</p>
     <p class="card-text"><small class="text-muted">Last updated {{object.updated}}</small></p>
       <hr/>
-      <!--- the link to the social media icons--->
+      <!--- the links to the social media icons--->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
           <p>
               <a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}"class="fa fa-facebook"></a>
@@ -27,6 +28,10 @@
       <hr/>
       <!--- comments section--->
       <p class="lead">Comments</p>
+        <form method="POST" action="."> {% csrf_token%}
+            {{comment_form | crispy}}
+            <input type="submit" value="Comment" class="btn btn-primary">
+        </form>
             {% for comment in comments %}
                 <blockquote class="blockquote">
                   <p class="mb-0">{{comment.content}}</p>

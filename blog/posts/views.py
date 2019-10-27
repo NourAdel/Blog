@@ -8,6 +8,7 @@ from django.utils import timezone
 from django.db.models import Q
 from django.contrib.contenttypes.models import ContentType
 from comments.models import Comment
+from comments.forms import CommentForm
 
 
 def posts_create (request):
@@ -30,8 +31,25 @@ def posts_detail(request, slug):
     if object .publish > timezone.now().date() or object.draft:
         if not request.user.is_staff or not request.user.is_superuser:
             return Http404
+    initial_data = {
+        'content_type': object.get_content_type,
+        'obj_id': object.id,
+    }
+
+    comment_form = CommentForm(request.POST or None, initial=initial_data)
+    if comment_form.is_valid():
+        c_type = comment_form.cleaned_data.get('content_type')
+        content_Type = ContentType.objects.get(model=c_type)
+        obj_id = comment_form.cleaned_data.get('obj_id')
+        content_data = comment_form.cleaned_data.get('content')
+        new_comment, created = Comment.objects.get_or_create(
+            user = request.user,
+            content_type = content_Type,
+            object_id= obj_id,
+            content = content_data
+        )
     comments = Comment.objects.filter_by_instance(object)
-    context = {'title': object.title, 'object': object, 'comments': comments}
+    context = {'title': object.title, 'object': object, 'comments': comments, 'comment_form': comment_form}
     return render(request, 'post_details.html', context)
 
 
