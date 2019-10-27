@@ -6,6 +6,7 @@ from django.conf import settings
 from django.utils import timezone
 from markdown_deux import markdown
 from django.utils.safestring import mark_safe
+# from comments.models import Comment
 
 
 # post.objects.all(), post..objects.create are PostManagers
@@ -45,6 +46,14 @@ class Post(models.Model):
         content = self.content
         return mark_safe(markdown(content))
 
+    # one other way to show comments, as property/method of Post
+    '''
+    @property
+    def comments(self):
+        instance = self
+        qs = Comment.objects.filter_by_instance(instance)
+        return qs
+'''
 
 # a function that gets executed before the object is saved to the database
 

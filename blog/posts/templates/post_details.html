@@ -25,12 +25,13 @@
               <a href="http://www.reddit.com/submit?url={{request.build_absolute_uri}}&title={{object.content| urlify}}"class="fa fa-reddit"></a>
           </p>
       <hr/>
+      <!--- comments section--->
       <p class="lead">Comments</p>
             {% for comment in comments %}
-                <div class=" "> {{comment.content}}
-                    <br/>
-                   <small>via {{comment.user}} | {{comment.time_stamp | timesince}} ago</small>
-                </div>
+                <blockquote class="blockquote">
+                  <p class="mb-0">{{comment.content}}</p>
+                  <footer class="blockquote-footer">via {{comment.user}} | {{comment.time_stamp | timesince}} ago</footer>
+                </blockquote>
                 <hr>
             {%endfor%}
 

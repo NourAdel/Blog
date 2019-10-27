@@ -30,9 +30,7 @@ def posts_detail(request, slug):
     if object .publish > timezone.now().date() or object.draft:
         if not request.user.is_staff or not request.user.is_superuser:
             return Http404
-    content_type = ContentType.objects.get_for_model(Post)
-    obj_id = object.id
-    comments= Comment.objects.filter(content_type= content_type, object_id=obj_id)
+    comments = Comment.objects.filter_by_instance(object)
     context = {'title': object.title, 'object': object, 'comments': comments}
     return render(request, 'post_details.html', context)
 
