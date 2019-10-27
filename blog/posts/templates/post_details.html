@@ -29,15 +29,31 @@
       <!--- comments section--->
       <p class="lead">Comments</p>
         <form method="POST" action="."> {% csrf_token%}
-            {{comment_form | crispy}}
+            {{comment_form | crispy }}
             <input type="submit" value="Comment" class="btn btn-primary">
         </form>
+      <hr/>
             {% for comment in comments %}
                 <blockquote class="blockquote">
-                  <p class="mb-0">{{comment.content}}</p>
+                  <p>{{comment.content}}</p>
                   <footer class="blockquote-footer">via {{comment.user}} | {{comment.time_stamp | timesince}} ago</footer>
+                    <div style="display: inline-block; margin 0 auto; padding:20px; ">
+                               {% for child in comment.children %}
+
+                                              <blockquote>
+                                               <p>{{child.content}}</p>
+                                                <footer class="blockquote-footer">via {{child.user}} | {{child.time_stamp | timesince}} ago</footer>
+                                            </blockquote>
+                            {% endfor %}
+                    <!--- replies--->
+                    <form method="POST" action="."> {% csrf_token%}
+                        {{comment_form | crispy}}
+                        <input type="hidden" name="parent_id" value="{{comment.id}}">
+                        <input type="submit" value="Reply" class="btn btn-primary">
+                    </form>
+                    </div>
                 </blockquote>
-                <hr>
+                <hr/>
             {%endfor%}
 
 

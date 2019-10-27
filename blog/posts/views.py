@@ -42,12 +42,27 @@ def posts_detail(request, slug):
         content_Type = ContentType.objects.get(model=c_type)
         obj_id = comment_form.cleaned_data.get('obj_id')
         content_data = comment_form.cleaned_data.get('content')
+        parent_obj = None
+        # checking if the comment has a parent
+        try:
+            parent_id = int(request.POST.get("parent_id"))
+        except:
+            parent_id = None
+        # if a parent exist, checking if it's a valid comment id
+        if parent_id:
+            parent_qs = Comment.objects.filter(id=parent_id)
+            if parent_qs.exists() and parent_qs.count() == 1:
+                # updating the parent with the first match in the query
+                parent_obj = parent_qs.first()
+
         new_comment, created = Comment.objects.get_or_create(
-            user = request.user,
-            content_type = content_Type,
-            object_id= obj_id,
-            content = content_data
+            user=request.user,
+            content_type=content_Type,
+            object_id=obj_id,
+            content=content_data,
+            parent=parent_obj
         )
+        return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
     comments = Comment.objects.filter_by_instance(object)
     context = {'title': object.title, 'object': object, 'comments': comments, 'comment_form': comment_form}
     return render(request, 'post_details.html', context)
